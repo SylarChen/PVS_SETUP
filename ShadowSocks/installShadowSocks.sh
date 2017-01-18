@@ -1,4 +1,4 @@
-yum install net-tools
+yum install -y net-tools
 
 #Ask shadowsocks configuration
 echo "=========================================================================="
