@@ -8,7 +8,8 @@
 * http://www.jianshu.com/p/28fd29e350b6
 * http://shadowsocks.blogspot.com/
 
-#Management portal of bandwagonhost.com
+#PVS supplier
+* https://bandwagonhost.com/clientarea.php
 * https://kiwivm.64clouds.com/main.php
 
 #Client
