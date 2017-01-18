@@ -9,7 +9,7 @@
 * http://shadowsocks.blogspot.com/
 
 #PVS supplier
-* https://bandwagonhost.com/clientarea.php
+* https://bandwagonhost.com
 * https://kiwivm.64clouds.com/main.php
 
 #Client
