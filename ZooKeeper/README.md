@@ -16,7 +16,7 @@
 11. echo 2 > /tmp/zookeeper/myid
 
 ## Start, Stop, Status
-* bin/zkServer.sh start start-foreground
+* bin/zkServer.sh start-foreground
 * bin/zkServer.sh stop
 * bin/zkServer.sh status
 
