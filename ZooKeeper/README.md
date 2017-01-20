@@ -10,7 +10,7 @@
 8. append lines in conf/zoo.cfg: (server.A=B:C:D 其中A是一个数字，代表这是第几号服务器；B是服务器的IP地址；C表示服务器与群集中的“领导者”交换信息的端口；当领导者失效后，D表示用来执行选举时服务器相互通信的端口)<br />
 	 server.1=master:2888:3888<br />
 	 server.2=slave:2888:3888
-9. scp -r ./zookeeper-3.4.8/ slave:~/ (copy whole folder to slave, including configuration file)
+9. scp -r ../zookeeper-3.4.8/ slave:~/ (copy whole folder to slave, including configuration file)
 10. echo 1 > /tmp/zookeeper/myid (dataDir in conf/zoo.cfg, 这行命令用来标识当前节点的id) <br />
 (on slave)
 11. echo 2 > /tmp/zookeeper/myid
