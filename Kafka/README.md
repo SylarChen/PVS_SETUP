@@ -15,7 +15,7 @@ listeners=PLAINTEXT://{hostname}:13647 <br />
 advertised.listeners=PLAINTEXT://{external.ip}:8080 <br />
 log.dirs=/data/home/logger/kafka_2.11-0.10.0.0/kafka-logs <br />
 num.partitions=2 <br />
-//所有zookeeper的ip <br />
+//所有zookeeper的ip, zookeeper默认端口是2181 <br />
 zookeeper.connect={zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 <br />
 6. scp -r ../kafka_2.11-0.10.1.1 {zookeeper.slave.ip}:~ <br />
 (on slave)
