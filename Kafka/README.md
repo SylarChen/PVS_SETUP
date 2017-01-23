@@ -1,25 +1,31 @@
-# Two VM Zookeeper cluster setup
-1. prepare two VMs
-2. edit /etc/hosts, make sure they are using the different fqdn.
-3. install java (yum install java-1.8.0-openjdk* -y) <br />
+# Two VM Kafka cluster setup
+1. setup zookeeper cluster https://github.com/SylarChen/PVS_SETUP/blob/master/ZooKeeper/README.md <br />
 (on master)
-4. wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
-5. tar -xvzf zookeeper-3.4.8.tar.gz
-6. cd zookeeper-3.4.8/
-7. cp conf/zoo_sample.cfg conf/zoo.cfg (zookeeper default configuration file is conf/zoo.cfg)
-8. append lines in conf/zoo.cfg: (server.A=B:C:D 其中A是一个数字，代表这是第几号服务器；B是服务器的IP地址；C表示服务器与群集中的“领导者”交换信息的端口；当领导者失效后，D表示用来执行选举时服务器相互通信的端口)<br />
-	 server.1=master:2888:3888<br />
-	 server.2=slave:2888:3888
-9. scp -r ../zookeeper-3.4.8/ slave:~/ (copy whole folder to slave, including configuration file)
-10. echo 1 > /tmp/zookeeper/myid (dataDir in conf/zoo.cfg, 这行命令用来标识当前节点的id) <br />
+2. wget http://apache.claz.org/kafka/0.10.1.1/kafka_2.11-0.10.1.1.tgz
+3. tar -xvf kafka_2.11-0.10.1.1.tgz
+4. cd kafka_2.11-0.10.1.1
+5. edit config/server.properties: <br />
+//允许删除 topic <br />
+delete.topic.enable=true <br />
+//Kafka server id, 这里不能重复 <br />
+broker.id=0 <br />
+//这里要配置成本机的 hostname <br />
+listeners=PLAINTEXT://{hostname}:13647 <br />
+//这里需要配置成外网能够访问的地址及端口 <br />
+advertised.listeners=PLAINTEXT://{external.ip}:8080 <br />
+log.dirs=/data/home/logger/kafka_2.11-0.10.0.0/kafka-logs <br />
+num.partitions=2 <br />
+//所有zookeeper的ip <br />
+zookeeper.connect={zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 <br />
+6. scp -r ../kafka_2.11-0.10.1.1 {zookeeper.slave.ip}:~ <br />
 (on slave)
-11. echo 2 > /tmp/zookeeper/myid
+7. edit config/server.properties
 
-## Start, Stop, Status
-* bin/zkServer.sh start-foreground
-* bin/zkServer.sh stop
-* bin/zkServer.sh status
+# Kafka commands
+* bin/kafka-server-start.sh config/server.properties (start)
+* bin/kafka-topics.sh --create --zookeeper {zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 --replication-factor 2 --partitions 1 --topic test (create topic "test")
+* bin/kafka-topics.sh --zookeeper {zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 --list (list all topics)
 
 # Tutorial
+* http://wdxtub.com/2016/08/15/kafka-guide/
 * http://www.coderli.com/setup-kafka-cluster-step-by-step/
-* http://www.cnblogs.com/smartloli/p/4298430.html
