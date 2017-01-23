@@ -9,7 +9,7 @@
 delete.topic.enable=true <br />
 //Kafka server id, 这里不能重复 <br />
 broker.id=0 <br />
-//这里要配置成本机的 hostname <br />
+//这里要配置成本机的 hostname, 此处端口是kafka 生产者端口？<br />
 listeners=PLAINTEXT://{hostname}:13647 <br />
 //这里需要配置成外网能够访问的地址及端口 <br />
 advertised.listeners=PLAINTEXT://{external.ip}:8080 <br />
@@ -25,6 +25,7 @@ zookeeper.connect={zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 <br />
 * bin/kafka-server-start.sh config/server.properties (start)
 * bin/kafka-topics.sh --create --zookeeper {zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 --replication-factor 2 --partitions 1 --topic test (create topic "test")
 * bin/kafka-topics.sh --zookeeper {zookeeper.master.ip}:2181,{zookeeper.slave.ip}:2181 --list (list all topics)
+* bin/kafka-console-producer.sh --broker-list {kafka.master.ip}:13647,{kafka.slave.ip}:13647 --topic test
 
 # Tutorial
 * http://wdxtub.com/2016/08/15/kafka-guide/
