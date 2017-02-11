@@ -9,7 +9,8 @@
 * http://shadowsocks.blogspot.com/
 
 #PVS supplier
-* https://bandwagonhost.com
+* https://bandwagonhost.com <br>
+  Promotional Code: IAMSMART5FQ956
 * https://kiwivm.64clouds.com/main.php
 
 #Client
